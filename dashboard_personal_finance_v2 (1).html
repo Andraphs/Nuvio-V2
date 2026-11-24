@@ -1,0 +1,1615 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Nuvio Personal Finance</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'primary': '#2F58E8',
+        'on-primary': '#FFFFFF',
+        'primary-container': '#192A6B',
+        'on-primary-container': '#DBE4FF',
+        'secondary': '#60A5FA',
+        'on-secondary': '#0A192F',
+        'surface': '#0B0D13',
+        'on-surface': '#F1F5F9',
+        'surface-container-low': '#12151F',
+        'surface-container': '#181C28',
+        'surface-container-high': '#212636',
+        'on-surface-variant': '#94A3B8',
+        'outline': '#475569',
+        'outline-variant': '#242938',
+        'success': '#22C55E',
+        'warning': '#F59E0B',
+        'error': '#F87171',
+        'chart-primary': '#3B66F5',
+        'chart-secondary': '#2543B5',
+        'chart-tertiary': '#1B2D78',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '20px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '40px',
+        'page-margin': '24px',
+      },
+      fontFamily: {
+        'display': ['"Wix Madefor Display"', 'sans-serif'],
+        'headline': ['"Wix Madefor Display"', 'sans-serif'],
+        'title': ['"Instrument Sans"', 'sans-serif'],
+        'body': ['"Instrument Sans"', 'sans-serif'],
+        'label': ['"Instrument Sans"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.75px', fontWeight: '700' }],
+        'display-lg-mobile': ['28px', { lineHeight: '36px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'headline-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.25px', fontWeight: '600' }],
+        'headline-md': ['20px', { lineHeight: '28px', letterSpacing: '-0.15px', fontWeight: '600' }],
+        'title-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '600' }],
+        'body-md': ['14px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.1px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.1px', fontWeight: '500' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '500' }],
+        'mono-sm': ['12px', { lineHeight: '16px', letterSpacing: '0px', fontWeight: '500' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '220ms',
+        'surface-exit': '150ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <script>
+    if (globalThis.tailwind && globalThis.tailwind.config && globalThis.tailwind.config.theme && globalThis.tailwind.config.theme.extend) {
+      globalThis.tailwind.config.theme.extend.colors = {
+        'primary': '#9312FF',
+        'on-primary': '#F7F7F8',
+        'primary-container': '#261147',
+        'on-primary-container': '#B7A8C9',
+        'secondary': '#B14EFF',
+        'on-secondary': '#F7F7F8',
+        'surface': '#000000',
+        'on-surface': '#F7F7F8',
+        'surface-container-low': '#0B0911',
+        'surface-container': '#14101F',
+        'surface-container-high': '#171420',
+        'on-surface-variant': '#8B8988',
+        'outline': 'rgba(255, 255, 255, 0.14)',
+        'outline-variant': 'rgba(255, 255, 255, 0.08)',
+        'success': '#45B558',
+        'warning': '#F59E0B',
+        'error': '#F03B2A',
+        'chart-primary': '#A020FF',
+        'chart-secondary': '#7A1CF8',
+        'chart-tertiary': '#261147',
+      };
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@600;700&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Source+Code+Pro:wght@500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --panel-bg: rgba(11, 9, 17, 0.86);
+      --panel-surface: rgba(20, 16, 31, 0.72);
+      --sidebar-bg: rgba(8, 6, 13, 0.55);
+      --nav-capsule-bg: rgba(14, 12, 20, 0.68);
+      --nav-active-pill: #171420;
+      --modal-bg: #0d0a14;
+      --text: #f7f7f8;
+      --muted: #8b8988;
+      --violet-muted: #b7a8c9;
+      --violet-link: #d6adff;
+      --violet: #9312ff;
+      --violet-bright: #b14eff;
+      --violet-grad-a: #a020ff;
+      --violet-grad-b: #7a1cf8;
+      --violet-rim-light: #e0b3ff;
+      --green: #45b558;
+      --red: #f03b2a;
+      --panel-border: rgba(147, 18, 255, 0.34);
+      --hairline: rgba(255, 255, 255, 0.08);
+      --btn-dark-border: rgba(255, 255, 255, 0.14);
+      --active-ring: rgba(147, 18, 255, 0.36);
+    }
+    html, body {
+      background-color: var(--bg);
+      color: var(--text);
+    }
+    .obsidian-canvas {
+      background:
+        radial-gradient(60% 45% at 72% 8%, rgba(147, 18, 255, 0.18) 0%, rgba(122, 28, 248, 0.05) 45%, transparent 75%),
+        radial-gradient(45% 40% at 15% 85%, rgba(177, 78, 255, 0.10) 0%, transparent 70%),
+        var(--bg);
+    }
+    .obsidian-panel {
+      background-color: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(224, 179, 255, 0.12);
+    }
+    .obsidian-sidebar-card {
+      background-color: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(224, 179, 255, 0.12);
+    }
+    .obsidian-surface {
+      background-color: var(--panel-surface);
+      border-color: var(--hairline);
+    }
+    .obsidian-nav-capsule {
+      background-color: var(--nav-capsule-bg) !important;
+      border-color: var(--hairline);
+    }
+    .obsidian-nav-active {
+      background-color: var(--nav-active-pill);
+      border: 1px solid var(--active-ring);
+      color: var(--text);
+      box-shadow: inset 0 1px 0 rgba(224, 179, 255, 0.14), 0 0 20px rgba(147, 18, 255, 0.14);
+    }
+    .obsidian-violet-btn {
+      background: linear-gradient(135deg, var(--violet-grad-a), var(--violet-grad-b));
+      color: var(--text);
+      box-shadow: 0 6px 20px rgba(147, 18, 255, 0.35), inset 0 1px 0 rgba(224, 179, 255, 0.32);
+    }
+    .obsidian-violet-btn:hover {
+      filter: brightness(1.08);
+    }
+    .obsidian-hero-card {
+      background-color: var(--panel-surface);
+      border-color: var(--panel-border);
+      box-shadow: inset 0 1px 0 rgba(224, 179, 255, 0.18), 0 12px 32px rgba(147, 18, 255, 0.08);
+    }
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: border-box;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="obsidian-canvas text-on-surface font-body antialiased">
+
+  <div class="min-h-[1024px] w-full flex flex-col md:flex-row bg-transparent md:p-4 md:gap-4" data-stitch-vh="min-h-[1024px]===min-h-screen">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-surface/80 z-30 hidden md:hidden" aria-hidden="true"></div>
+
+    <!-- Floating Split Sidebar Navigation (Monef Style) -->
+    <aside id="app-sidebar" aria-label="Main navigation" class="fixed inset-y-0 left-0 z-40 w-64 min-h-[1024px] md:min-h-0 bg-surface-container-low md:bg-transparent border-r md:border-0 border-outline-variant flex flex-col justify-between gap-4 p-4 md:p-0 transform -translate-x-full md:translate-x-0 md:static md:shrink-0 transition-transform duration-surface-enter ease-surface-enter" data-stitch-vh="min-h-[1024px]===min-h-screen">
+      <!-- Card 1: Brand & Primary Navigation -->
+      <div class="flex flex-col gap-6 obsidian-sidebar-card md:rounded-xl p-4 md:p-5">
+        <!-- Brand Header + Collapse Button -->
+        <div class="flex items-center justify-between gap-2 px-1">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-md obsidian-violet-btn flex items-center justify-center text-on-primary">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5.5 17.5V6.5L13 14.5V6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M13 14.5L18.5 8.5V17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.7"></path>
+                <circle cx="18.5" cy="6.5" r="1.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <span data-design-text-token="headline-md" class="font-headline text-headline-md tracking-tight bg-gradient-to-r from-[#f7f7f8] to-[#e0b3ff] bg-clip-text text-transparent">Nuvio</span>
+          </div>
+          <button id="close-sidebar-btn" type="button" aria-label="Close navigation menu" class="md:hidden inline-flex items-center justify-center w-7 h-7 rounded-full obsidian-nav-capsule border text-on-surface-variant hover:text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="material-symbols-outlined text-body-md" aria-hidden="true">close</span>
+          </button>
+          <span class="hidden md:inline-flex items-center justify-center w-7 h-7 rounded-full obsidian-nav-capsule border text-on-surface-variant" aria-hidden="true">
+            <span class="material-symbols-outlined text-body-md">chevron_left</span>
+          </span>
+        </div>
+
+        <!-- Primary Navigation Links -->
+        <nav class="flex flex-col gap-3" aria-label="Application pages">
+          <a href="#dashboard" aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded-full obsidian-nav-active font-body text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="w-7 h-7 rounded-full bg-primary/20 border border-primary/40 text-secondary inline-flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-body-md" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">home</span>
+            </span>
+            <span data-design-text-token="label-lg">Dashboard</span>
+          </a>
+
+          <a href="#transactions" class="flex items-center gap-3 px-3 py-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 font-body text-label-lg transition-colors duration-state-change ease-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="w-7 h-7 rounded-full obsidian-nav-capsule border inline-flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-body-md" aria-hidden="true">receipt_long</span>
+            </span>
+            <span data-design-text-token="label-lg">Transactions</span>
+          </a>
+
+          <!-- Analytics with Nested Tree -->
+          <div class="flex flex-col gap-2">
+            <a href="#analytics" class="flex items-center gap-3 px-3 py-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 font-body text-label-lg transition-colors duration-state-change ease-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+              <span class="w-7 h-7 rounded-full obsidian-nav-capsule border inline-flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">bar_chart</span>
+              </span>
+              <span data-design-text-token="label-lg">Analytics</span>
+            </a>
+            <div class="ml-6 flex flex-col">
+              <div class="relative flex items-center pl-4 py-1">
+                <span class="absolute left-0 top-0 bottom-0 border-l border-outline-variant" aria-hidden="true"></span>
+                <span class="absolute left-0 top-1/2 w-3 border-t border-outline-variant" aria-hidden="true"></span>
+                <a href="#balance" class="px-2 py-1 rounded-DEFAULT text-on-surface-variant hover:text-on-surface font-body text-body-sm transition-colors duration-state-change">Balance</a>
+              </div>
+              <div class="relative flex items-center pl-4 py-1">
+                <span class="absolute left-0 top-0 bottom-0 border-l border-outline-variant" aria-hidden="true"></span>
+                <span class="absolute left-0 top-1/2 w-3 border-t border-outline-variant" aria-hidden="true"></span>
+                <a href="#income" class="px-2 py-1 rounded-DEFAULT text-on-surface-variant hover:text-on-surface font-body text-body-sm transition-colors duration-state-change">Income</a>
+              </div>
+              <div class="relative flex items-center pl-4 py-1">
+                <span class="absolute left-0 top-0 h-1/2 w-3 border-l border-b border-outline-variant rounded-bl-sm" aria-hidden="true"></span>
+                <a href="#expenses" class="px-2 py-1 rounded-DEFAULT text-on-surface-variant hover:text-on-surface font-body text-body-sm transition-colors duration-state-change">Expenses</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="#budgets" class="flex items-center gap-3 px-3 py-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 font-body text-label-lg transition-colors duration-state-change ease-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="w-7 h-7 rounded-full obsidian-nav-capsule border inline-flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-body-md" aria-hidden="true">pie_chart</span>
+            </span>
+            <span data-design-text-token="label-lg">Budgets</span>
+          </a>
+
+          <a href="#goals" class="flex items-center gap-3 px-3 py-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 font-body text-label-lg transition-colors duration-state-change ease-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="w-7 h-7 rounded-full obsidian-nav-capsule border inline-flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-body-md" aria-hidden="true">flag</span>
+            </span>
+            <span data-design-text-token="label-lg">Goals</span>
+          </a>
+
+          <div class="my-2 border-t border-outline-variant"></div>
+
+          <a href="#settings" class="flex items-center gap-3 px-3 py-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 font-body text-label-lg transition-colors duration-state-change ease-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="w-7 h-7 rounded-full obsidian-nav-capsule border inline-flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-body-md" aria-hidden="true">settings</span>
+            </span>
+            <span data-design-text-token="label-lg">Settings</span>
+          </a>
+
+          <a href="#help-center" class="flex items-center gap-3 px-3 py-2 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 font-body text-label-lg transition-colors duration-state-change ease-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+            <span class="w-7 h-7 rounded-full obsidian-nav-capsule border inline-flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-body-md" aria-hidden="true">help</span>
+            </span>
+            <span data-design-text-token="label-lg">Help Center</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Cards 2 & 3 Separate: Sync Status + User Profile -->
+      <div class="flex flex-col gap-3">
+        <div class="p-3.5 rounded-xl obsidian-sidebar-card flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border-2 border-success flex items-center justify-center shrink-0">
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface tabular-nums">2/3</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">Accounts Synced</span>
+              <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant text-pretty">Read-only access active.</span>
+            </div>
+          </div>
+          <a href="#settings" class="w-full py-1.5 px-3 rounded-full obsidian-nav-capsule border text-center font-body text-label-sm text-[#d6adff] hover:border-outline transition-colors duration-state-change">
+            <span data-design-text-token="label-sm">Manage Connections</span>
+          </a>
+        </div>
+
+        <div class="p-2.5 rounded-xl obsidian-sidebar-card flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrCW7tYIIjE0BzTDYpGLPFJ-yItWMB936ClvjgzcBArItLBrppOMn8gviyFJYVee1ErojFqkcO64EfjApoPjhxja5PLc3DPQv57z44uTtJsabaGmpPIljPBHL5cfp6jTJXUY6VD0MnAOuq99SQK90AQaPNdgsISr7AluWg9JpOTNVHLu3iigv_LOd0kVxQK7N5W9TfJ1D_r_vgNfuaA2Hl9mHBbNjsRO8t5Vm7qDhD526dXuRdo" alt="Raka Pratama profile photo" class="w-8 h-8 rounded-full object-cover border border-outline-variant shrink-0">
+            <div class="min-w-0 flex flex-col">
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface truncate">Andra Pratama</span>
+              <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant truncate">andra@mail.com</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-body-md shrink-0" aria-hidden="true">settings</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 min-w-0 flex flex-col obsidian-panel md:rounded-xl overflow-hidden">
+
+      <!-- Top Header Bar -->
+      <header class="w-full border-b border-outline-variant bg-transparent px-4 md:px-5 py-4 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+          <button id="open-sidebar-btn" type="button" aria-label="Open navigation menu" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md obsidian-nav-capsule border text-on-surface hover:border-outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary shrink-0">
+            <span class="material-symbols-outlined text-title-md" aria-hidden="true">menu</span>
+          </button>
+
+          <label for="global-search" class="sr-only">Search transactions or accounts</label>
+          <div class="relative flex-1 max-w-sm">
+            <span class="material-symbols-outlined text-on-surface-variant text-title-md absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">search</span>
+            <input id="global-search" type="search" placeholder="Search transactions or accounts..." class="w-full pl-10 pr-14 py-2.5 rounded-full obsidian-nav-capsule border text-on-surface placeholder-on-surface-variant font-body text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-sm bg-surface-container-high border border-outline-variant font-mono text-mono-sm text-on-surface-variant absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">⌘K</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full obsidian-nav-capsule border">
+            <span class="w-2 h-2 rounded-full bg-success shrink-0" aria-hidden="true"></span>
+            <span id="sync-status-text" data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface-variant whitespace-nowrap">Synced: 2m ago</span>
+          </div>
+          <!-- COMPONENT: button-icon -->
+          <button id="sync-all-btn" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Sync all connected accounts" class="inline-flex items-center justify-center w-10 h-10 rounded-full obsidian-nav-capsule text-on-surface-variant border hover:text-on-surface hover:border-outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary transition-colors duration-state-change ease-state-change">
+            <span class="material-symbols-outlined text-title-md" aria-hidden="true">sync</span>
+          </button>
+          <button id="notifications-btn" type="button" aria-label="Notifications" class="relative inline-flex items-center justify-center w-10 h-10 rounded-full obsidian-nav-capsule text-on-surface-variant border hover:text-on-surface hover:border-outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary transition-colors duration-state-change ease-state-change">
+            <span class="material-symbols-outlined text-title-md" aria-hidden="true">notifications</span>
+            <span class="w-2 h-2 rounded-full bg-secondary absolute top-2 right-2.5" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Workspace (Monef Bento Grid 1440 x 1024) -->
+      <main class="flex-1 px-4 md:px-5 pt-3 pb-4 flex flex-col gap-3 w-full">
+
+        <!-- Greeting & Period Controls -->
+        <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex flex-col gap-0.5">
+            <h1 data-design-text-token="headline-lg" class="font-headline text-headline-lg text-on-surface">Hello, Andra!</h1>
+            <p data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Cash flow summary for <span id="active-period-label" class="text-on-surface">Nov 2026</span>.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <div class="flex items-center gap-2 obsidian-nav-capsule border rounded-full px-4 py-2">
+              <span class="material-symbols-outlined text-on-surface-variant text-title-md" aria-hidden="true">calendar_today</span>
+              <label for="period-selector" class="sr-only">Select reporting period</label>
+              <select id="period-selector" class="bg-transparent border-0 p-0 pr-6 text-on-surface font-body text-label-lg focus:ring-0 cursor-pointer">
+                <option value="2026-11" class="bg-[#0d0a14] text-on-surface">Nov 2026</option>
+                <option value="2026-10" class="bg-[#0d0a14] text-on-surface">Oct 2026</option>
+                <option value="2026-09" class="bg-[#0d0a14] text-on-surface">Sep 2026</option>
+                <option value="2026-01" class="bg-[#0d0a14] text-on-surface">Jan 2026 (No comparison)</option>
+              </select>
+            </div>
+
+            <!-- COMPONENT: button-with-icon -->
+            <button id="connect-account-btn" data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="button" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full obsidian-violet-btn font-body text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary transition-all duration-state-change ease-state-change">
+              <span class="material-symbols-outlined text-title-md" aria-hidden="true">add_link</span>
+              <span data-design-text-token="label-lg">Connect Account</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 3 Metric Cards (Asymmetric 6-3-3 Bento Row) -->
+        <section aria-label="Financial summary" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-stretch">
+          <!-- Total Balance (Hero Card - 6 cols) -->
+          <!-- COMPONENT: card-elevated -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="sm:col-span-2 lg:col-span-6 relative overflow-hidden h-full obsidian-hero-card border rounded-lg p-4 flex flex-col justify-between gap-2.5">
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#9312ff]/25 via-[#7a1cf8]/10 to-transparent" aria-hidden="true"></div>
+            <header class="relative flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <h2 data-design-text-token="label-sm" class="font-body text-label-sm text-[#b7a8c9]">Total Balance (USD)</h2>
+                <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/20 border border-primary/40 font-body text-label-sm text-[#d6adff] tabular-nums">Net +$3,410</span>
+              </div>
+              <span class="w-8 h-8 rounded-md bg-primary/20 border border-primary/40 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-secondary text-title-md" aria-hidden="true">account_balance_wallet</span>
+              </span>
+            </header>
+            <div class="relative flex items-end justify-between gap-3">
+              <div class="flex flex-col gap-1.5">
+                <p id="metric-balance" data-design-text-token="headline-lg" class="font-headline text-headline-lg text-on-surface tabular-nums">$16,420.50</p>
+                <div id="metric-balance-compare" class="flex items-center gap-1.5 flex-wrap">
+                  <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-surface-container-high text-success font-body text-label-sm tabular-nums">
+                    <span class="material-symbols-outlined text-body-sm" aria-hidden="true">trending_up</span>
+                    <span data-design-text-token="label-sm">+4.2%</span>
+                  </span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">vs Oct 2026</span>
+                </div>
+              </div>
+              <svg class="w-28 h-12 text-secondary shrink-0" viewBox="0 0 112 48" fill="none" aria-hidden="true">
+                <path d="M2 38C18 36 26 28 40 29C54 30 62 18 76 16C90 14 98 7 110 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle cx="110" cy="4" r="3" fill="#e0b3ff"></circle>
+              </svg>
+            </div>
+          </article>
+
+          <!-- Income (3 cols) -->
+          <!-- COMPONENT: card-elevated -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="lg:col-span-3 h-full obsidian-surface border rounded-lg p-4 flex flex-col justify-between gap-2.5">
+            <header class="flex items-center justify-between gap-2">
+              <h2 data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface-variant">Income (<span class="period-short">Nov 2026</span>)</h2>
+              <span class="w-8 h-8 rounded-md bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-success text-title-md" aria-hidden="true">arrow_downward</span>
+              </span>
+            </header>
+            <div class="flex items-end justify-between gap-2">
+              <div class="flex flex-col gap-1.5 min-w-0">
+                <p id="metric-income" data-design-text-token="headline-lg" class="font-headline text-headline-lg text-on-surface tabular-nums">$6,250.00</p>
+                <div id="metric-income-compare" class="flex items-center gap-1.5 flex-wrap">
+                  <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-surface-container-high text-success font-body text-label-sm tabular-nums">
+                    <span class="material-symbols-outlined text-body-sm" aria-hidden="true">trending_up</span>
+                    <span data-design-text-token="label-sm">+6.8%</span>
+                  </span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">vs Oct 2026</span>
+                </div>
+              </div>
+              <svg class="w-14 h-9 text-success shrink-0" viewBox="0 0 80 40" fill="none" aria-hidden="true">
+                <path d="M2 30C14 29 22 28 32 22C42 16 50 18 60 11C68 6 73 7 78 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle cx="78" cy="5" r="2.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+          </article>
+
+          <!-- Expenses (3 cols) -->
+          <!-- COMPONENT: card-elevated -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="lg:col-span-3 h-full obsidian-surface border rounded-lg p-4 flex flex-col justify-between gap-2.5">
+            <header class="flex items-center justify-between gap-2">
+              <h2 data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface-variant">Expenses (<span class="period-short">Nov 2026</span>)</h2>
+              <span class="w-8 h-8 rounded-md bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-warning text-title-md" aria-hidden="true">arrow_upward</span>
+              </span>
+            </header>
+            <div class="flex items-end justify-between gap-2">
+              <div class="flex flex-col gap-1.5 min-w-0">
+                <p id="metric-expense" data-design-text-token="headline-lg" class="font-headline text-headline-lg text-on-surface tabular-nums">$2,840.00</p>
+                <div id="metric-expense-compare" class="flex items-center gap-1.5 flex-wrap">
+                  <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-surface-container-high text-success font-body text-label-sm tabular-nums">
+                    <span class="material-symbols-outlined text-body-sm" aria-hidden="true">trending_down</span>
+                    <span data-design-text-token="label-sm">-3.1%</span>
+                  </span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">vs Oct 2026</span>
+                </div>
+              </div>
+              <svg class="w-14 h-9 text-warning shrink-0" viewBox="0 0 80 40" fill="none" aria-hidden="true">
+                <path d="M2 14C12 18 20 12 30 20C40 28 50 18 60 24C68 28 73 25 78 27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle cx="78" cy="27" r="2.5" fill="currentColor"></circle>
+              </svg>
+            </div>
+          </article>
+        </section>
+
+        <!-- Middle Bento Row (8-4): Annual Cash Flow + Transaction History -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
+
+          <!-- Left Column (8 cols): Annual Cash Flow (Connected to Total Balance, Income & Expenses) -->
+          <article class="md:col-span-8 obsidian-surface border rounded-lg p-4 flex flex-col justify-between gap-3">
+            <header class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-title-md text-secondary" aria-hidden="true">show_chart</span>
+                <h2 data-design-text-token="title-md" class="font-body text-title-md text-on-surface">Annual Cash Flow</h2>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <div class="hidden sm:flex items-center gap-3">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-secondary inline-block" aria-hidden="true"></span>
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Total Balance</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-success inline-block" aria-hidden="true"></span>
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Income</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-warning inline-block" aria-hidden="true"></span>
+                    <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Expenses</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <label for="chart-year-select" class="sr-only">Select chart year</label>
+                  <div class="relative inline-flex items-center">
+                    <select id="chart-year-select" class="appearance-none bg-none h-8 rounded-full obsidian-nav-capsule border border-outline-variant hover:border-outline text-on-surface font-body text-label-sm pl-3.5 pr-8 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors duration-state-change cursor-pointer">
+                      <option value="2026" class="bg-[#0d0a14] text-on-surface">2026</option>
+                      <option value="2025" class="bg-[#0d0a14] text-on-surface">2025</option>
+                      <option value="empty" class="bg-[#0d0a14] text-on-surface">2024 (Empty)</option>
+                    </select>
+                    <span class="material-symbols-outlined text-body-md text-on-surface-variant pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2" aria-hidden="true">expand_more</span>
+                  </div>
+                  <button id="chart-more-btn" type="button" aria-label="Annual cash flow options" class="inline-flex items-center justify-center w-8 h-8 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+                    <span class="material-symbols-outlined text-title-md" aria-hidden="true">more_horiz</span>
+                  </button>
+                </div>
+              </div>
+            </header>
+
+            <div id="chart-container" class="relative w-full flex flex-col gap-2">
+              <!-- Plot Area: Left Y-Axis (Balance) + Multi-Line SVG + Right Y-Axis (Income/Expenses) -->
+              <div class="flex items-stretch gap-2">
+                <div class="w-10 shrink-0 flex flex-col justify-between text-right py-1 select-none" aria-hidden="true">
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-secondary tabular-nums">$20k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">$15k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">$10k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">$5k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">0</span>
+                </div>
+
+                <div class="relative flex-1 min-w-0">
+                  <svg id="trend-chart-svg" viewBox="0 0 720 184" class="w-full h-auto block overflow-visible" role="img" aria-label="Annual cash flow trend chart for Total Balance, Income, and Expenses">
+                    <!-- Rendered dynamically by renderChart() -->
+                  </svg>
+
+                  <!-- Floating Dark Tooltip Card (over non-interactive SVG plot) -->
+                  <div id="chart-tooltip" role="status" aria-live="polite" class="pointer-events-none absolute top-1 left-1/2 -translate-x-1/2 w-52 px-3 py-2 rounded-md bg-[#0d0a14]/95 border border-primary/40 text-on-surface flex flex-col gap-1 transition-all duration-state-change shadow-lg">
+                    <div class="flex items-center justify-between gap-2 pb-1 border-b border-outline-variant">
+                      <span id="tooltip-month" data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">Jul 2026</span>
+                      <strong id="tooltip-total" data-design-text-token="label-sm" class="font-body text-label-sm text-success tabular-nums">Net +$4,380</strong>
+                    </div>
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="flex items-center gap-1.5 font-body text-body-sm text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-secondary shrink-0" aria-hidden="true"></span>
+                        Balance
+                      </span>
+                      <strong id="tooltip-cat1" data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface tabular-nums">$15,890.00</strong>
+                    </div>
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="flex items-center gap-1.5 font-body text-body-sm text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-success shrink-0" aria-hidden="true"></span>
+                        Income
+                      </span>
+                      <strong id="tooltip-cat2" data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface tabular-nums">$6,840.00</strong>
+                    </div>
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="flex items-center gap-1.5 font-body text-body-sm text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-warning shrink-0" aria-hidden="true"></span>
+                        Expenses
+                      </span>
+                      <strong id="tooltip-cat3" data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface tabular-nums">$2,460.00</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hidden sm:flex w-8 shrink-0 flex-col justify-between text-left py-1 select-none" aria-hidden="true">
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-success tabular-nums">$8k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">$6k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">$4k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">$2k</span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">0</span>
+                </div>
+              </div>
+
+              <!-- X-Axis Month Selector Buttons -->
+              <div id="chart-months-row" class="pl-12 sm:pr-10 grid grid-cols-6 sm:grid-cols-12 gap-1">
+                <!-- Rendered dynamically by renderChart() -->
+              </div>
+            </div>
+
+            <!-- Chart Empty State -->
+            <div id="chart-empty-state" class="hidden flex-col items-center justify-center text-center py-8 px-4 gap-2 bg-surface-container-low rounded-md border border-outline-variant">
+              <span class="material-symbols-outlined text-on-surface-variant text-headline-md" aria-hidden="true">show_chart</span>
+              <p data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface">No cash flow data available</p>
+              <p data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Select another year or connect an account to import history.</p>
+            </div>
+
+            <!-- Footer: Year Caption + Interactive Hint -->
+            <footer class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-outline-variant">
+              <p id="chart-year-caption" data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">*This chart shows data for 2026</p>
+              <div class="flex sm:hidden flex-wrap items-center gap-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-secondary inline-block" aria-hidden="true"></span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Balance</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-success inline-block" aria-hidden="true"></span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Income</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-warning inline-block" aria-hidden="true"></span>
+                  <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Expenses</span>
+                </div>
+              </div>
+              <span data-design-text-token="body-sm" class="hidden sm:inline font-body text-body-sm text-on-surface-variant">Click any month to sync Total Balance, Income &amp; Expenses</span>
+            </footer>
+          </article>
+
+          <!-- Right Column (4 cols): Transaction History (SpendIQ style) -->
+          <article class="md:col-span-4 obsidian-surface border rounded-lg p-4 flex flex-col gap-3.5">
+            <header class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="material-symbols-outlined text-title-md text-on-surface shrink-0" aria-hidden="true">receipt</span>
+                <h2 data-design-text-token="title-md" class="font-body text-title-md text-on-surface whitespace-nowrap">Transaction History</h2>
+              </div>
+              <label for="tx-history-period" class="sr-only">Transaction history period</label>
+              <div class="relative inline-flex items-center shrink-0">
+                <select id="tx-history-period" class="appearance-none bg-none h-8 rounded-full obsidian-nav-capsule border border-outline-variant hover:border-outline text-on-surface font-body text-label-sm pl-3.5 pr-8 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors duration-state-change cursor-pointer">
+                  <option value="this-month" class="bg-[#0d0a14] text-on-surface">This Month</option>
+                  <option value="last-month" class="bg-[#0d0a14] text-on-surface">Last Month</option>
+                </select>
+                <span class="material-symbols-outlined text-body-md text-on-surface-variant pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2" aria-hidden="true">expand_more</span>
+              </div>
+            </header>
+
+            <!-- Monthly Spend Progress Strip -->
+            <div class="flex flex-col gap-2">
+              <div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+                <div id="tx-history-progress" class="h-full rounded-full bg-gradient-to-r from-[#a020ff] to-[#e0b3ff] transition-all duration-surface-enter" style="width: 62%;"></div>
+              </div>
+              <div class="flex items-center justify-between gap-2">
+                <p id="tx-history-delta" data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Increased <span class="font-body text-label-sm text-on-surface">12%</span> this month</p>
+                <p id="tx-history-sofar" data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums"><span class="font-body text-label-sm text-on-surface">$102.00</span> so far</p>
+              </div>
+            </div>
+
+            <!-- Grouped Transactions -->
+            <div id="tx-history-groups" class="flex flex-col gap-3">
+              <!-- Today -->
+              <div class="flex flex-col gap-2">
+                <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface-variant">Today</span>
+                <ul class="flex flex-col gap-2.5">
+                  <li class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <span class="w-9 h-9 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 text-error">
+                        <span class="material-symbols-outlined text-title-md" aria-hidden="true">movie</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface truncate">Netflix Monthly</span>
+                        <span data-design-text-token="body-sm" class="inline-flex items-center gap-1 font-body text-body-sm text-on-surface-variant truncate">
+                          <span class="material-symbols-outlined text-body-sm" aria-hidden="true">north_east</span>
+                          <span>Paid · Account Balance</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-lg" class="font-body text-label-lg text-error tabular-nums whitespace-nowrap">-$19.99</span>
+                  </li>
+
+                  <li class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <span class="w-9 h-9 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 text-on-surface">
+                        <span class="material-symbols-outlined text-title-md" aria-hidden="true">account_balance_wallet</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface truncate">Top Up</span>
+                        <span data-design-text-token="body-sm" class="inline-flex items-center gap-1 font-body text-body-sm text-on-surface-variant truncate">
+                          <span class="material-symbols-outlined text-body-sm" aria-hidden="true">south_west</span>
+                          <span>Received · Visa ******494</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-lg" class="font-body text-label-lg text-success tabular-nums whitespace-nowrap">+$30.00</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Yesterday -->
+              <div class="flex flex-col gap-2">
+                <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface-variant">Yesterday</span>
+                <ul class="flex flex-col gap-2.5">
+                  <li class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <span class="w-9 h-9 rounded-full bg-primary-container border border-primary/40 flex items-center justify-center shrink-0 text-secondary">
+                        <span class="material-symbols-outlined text-title-md" aria-hidden="true">cloud</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface truncate">iCloud Yearly</span>
+                        <span data-design-text-token="body-sm" class="inline-flex items-center gap-1 font-body text-body-sm text-on-surface-variant truncate">
+                          <span class="material-symbols-outlined text-body-sm" aria-hidden="true">north_east</span>
+                          <span>Paid · Account Balance</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-lg" class="font-body text-label-lg text-error tabular-nums whitespace-nowrap">-$11.88</span>
+                  </li>
+
+                  <li class="flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <span class="w-9 h-9 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 text-success">
+                        <span class="material-symbols-outlined text-title-md" aria-hidden="true">graphic_eq</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface truncate">Spotify Monthly</span>
+                        <span data-design-text-token="body-sm" class="inline-flex items-center gap-1 font-body text-body-sm text-on-surface-variant truncate">
+                          <span class="material-symbols-outlined text-body-sm" aria-hidden="true">north_east</span>
+                          <span>Paid · Account Balance</span>
+                        </span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-lg" class="font-body text-label-lg text-error tabular-nums whitespace-nowrap">-$9.99</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Bottom Bento Row (4-8): Connected Accounts + Subscription List -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
+
+          <!-- Left Column (4 cols): Connected Accounts -->
+          <article class="md:col-span-4 obsidian-surface border rounded-lg p-4 flex flex-col justify-between gap-3">
+            <div class="flex flex-col gap-3">
+              <header class="flex items-center justify-between gap-2">
+                <h2 data-design-text-token="title-md" class="font-body text-title-md text-on-surface truncate">Connected Accounts</h2>
+                <span data-design-text-token="label-sm" id="connected-count-badge" class="inline-flex items-center h-8 shrink-0 whitespace-nowrap px-3.5 rounded-full obsidian-nav-capsule border border-outline-variant text-on-surface font-body text-label-sm tabular-nums">3 Accounts</span>
+              </header>
+
+              <ul id="accounts-list" class="flex flex-col gap-2.5">
+                <!-- Chase -->
+                <li class="p-3 rounded-md obsidian-nav-capsule border flex flex-col gap-1.5" data-account-id="chase">
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="w-7 h-7 rounded-full bg-primary-container border border-primary/40 flex items-center justify-center shrink-0 text-secondary">
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">account_balance</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface truncate">Chase Checking</span>
+                        <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">•••• 4821</span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-sm" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-success font-body text-label-sm shrink-0">Synced</span>
+                  </div>
+                  <div class="flex items-center justify-between gap-2 pl-9">
+                    <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface tabular-nums">$12,180.50</span>
+                    <button type="button" onclick="disconnectAccount(&#39;chase&#39;, &#39;Chase Checking&#39;)" class="font-body text-label-sm text-error hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-error rounded-sm">Disconnect</button>
+                  </div>
+                </li>
+
+                <!-- Apple Cash -->
+                <li class="p-3 rounded-md obsidian-nav-capsule border flex flex-col gap-1.5" data-account-id="apple-cash">
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="w-7 h-7 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 text-on-surface">
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">smartphone</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface truncate">Apple Cash</span>
+                        <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">•••• 1094</span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-sm" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-success font-body text-label-sm shrink-0">Synced</span>
+                  </div>
+                  <div class="flex items-center justify-between gap-2 pl-9">
+                    <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface tabular-nums">$940.00</span>
+                    <button type="button" onclick="disconnectAccount(&#39;apple-cash&#39;, &#39;Apple Cash&#39;)" class="font-body text-label-sm text-error hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-error rounded-sm">Disconnect</button>
+                  </div>
+                </li>
+
+                <!-- Citibank -->
+                <li class="p-3 rounded-md obsidian-nav-capsule border border-error/50 flex flex-col gap-1.5" data-account-id="citi">
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="w-7 h-7 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 text-error">
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">credit_card</span>
+                      </span>
+                      <div class="flex flex-col min-w-0">
+                        <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface truncate">Citibank</span>
+                        <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant tabular-nums">•••• 7732</span>
+                      </div>
+                    </div>
+                    <span data-design-text-token="label-sm" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-error font-body text-label-sm shrink-0">Failed</span>
+                  </div>
+                  <p data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant pl-9">Session expired. Refresh access.</p>
+                  <div class="flex items-center justify-between gap-2 pt-1.5 pl-9">
+                    <button type="button" onclick="retrySync(&#39;citi&#39;)" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full obsidian-violet-btn font-body text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary transition-all duration-state-change">
+                      <span class="material-symbols-outlined text-body-sm" aria-hidden="true">refresh</span>
+                      <span>Refresh</span>
+                    </button>
+                    <button type="button" onclick="disconnectAccount(&#39;citi&#39;, &#39;Citibank&#39;)" class="px-2.5 py-1 rounded-full font-body text-label-sm text-error hover:bg-error/10 transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-error">Disconnect</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Right Column (8 cols): Subscription List -->
+          <article class="md:col-span-8 obsidian-surface border rounded-lg p-4 flex flex-col gap-3">
+            <header class="flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-md bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-title-md text-on-surface" aria-hidden="true">receipt_long</span>
+                </span>
+                <h2 data-design-text-token="title-md" class="font-body text-title-md text-on-surface">Subscription List</h2>
+              </div>
+              <div class="flex items-center gap-3">
+                <button id="add-subscription-btn" type="button" class="inline-flex items-center gap-1.5 font-body text-label-lg text-[#d6adff] hover:text-secondary transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+                  <span class="material-symbols-outlined text-title-md" aria-hidden="true">add_circle_outline</span>
+                  <span>Add Subscription</span>
+                </button>
+                <span class="h-4 w-px bg-outline-variant" aria-hidden="true"></span>
+                <button id="view-all-subs-btn" type="button" class="font-body text-label-lg text-on-surface-variant hover:text-on-surface transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">View All</button>
+              </div>
+            </header>
+
+            <!-- Subscription Table -->
+            <div data-component-id="table-standard" data-component-type="table" data-component-variant="standard" class="w-full overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="border-b border-outline-variant text-on-surface-variant">
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap">
+                      <button type="button" data-sort-key="service" class="sub-sort-btn inline-flex items-center gap-1 hover:text-on-surface transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+                        <span data-design-text-token="label-sm">SERVICE</span>
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">unfold_more</span>
+                      </button>
+                    </th>
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap">
+                      <span data-design-text-token="label-sm">PLAN</span>
+                    </th>
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap">
+                      <button type="button" data-sort-key="billing" class="sub-sort-btn inline-flex items-center gap-1 hover:text-on-surface transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+                        <span data-design-text-token="label-sm">BILLING</span>
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">unfold_more</span>
+                      </button>
+                    </th>
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap">
+                      <button type="button" data-sort-key="nextBilling" class="sub-sort-btn inline-flex items-center gap-1 hover:text-on-surface transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+                        <span data-design-text-token="label-sm">NEXT BILLING</span>
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">unfold_more</span>
+                      </button>
+                    </th>
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap">
+                      <button type="button" data-sort-key="amount" class="sub-sort-btn inline-flex items-center gap-1 hover:text-on-surface transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+                        <span data-design-text-token="label-sm">AMOUNT</span>
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">unfold_more</span>
+                      </button>
+                    </th>
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap">
+                      <button type="button" data-sort-key="status" class="sub-sort-btn inline-flex items-center gap-1 hover:text-on-surface transition-colors duration-state-change focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+                        <span data-design-text-token="label-sm">STATUS</span>
+                        <span class="material-symbols-outlined text-body-md" aria-hidden="true">unfold_more</span>
+                      </button>
+                    </th>
+                    <th scope="col" class="py-2 px-1 font-body text-label-sm uppercase whitespace-nowrap text-right">
+                      <span data-design-text-token="label-sm">ACTIONS</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="sub-table-body" class="divide-y divide-outline-variant"><tr class="hover:bg-surface-container-high transition-colors duration-state-change ease-state-change">
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center shrink-0 bg-surface-container-high text-error">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">movie</span>
+              </span>
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">Netflix</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Premium</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Monthly</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant tabular-nums whitespace-nowrap">
+            <span data-design-text-token="body-sm">Apr 5, 2026</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-label-sm text-on-surface tabular-nums whitespace-nowrap">
+            <span data-design-text-token="label-sm">$19.99</span>
+          </td>
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <span data-design-text-token="label-sm" class="font-body text-label-sm text-success">Active</span>
+          </td>
+          <td class="py-2.5 px-1 text-right whitespace-nowrap">
+            <button type="button" data-action="more" aria-label="More actions for Netflix" class="inline-flex items-center justify-center w-7 h-7 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"><span class="material-symbols-outlined text-title-md" aria-hidden="true">more_horiz</span></button>
+          </td>
+        </tr><tr class="hover:bg-surface-container-high transition-colors duration-state-change ease-state-change">
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center shrink-0 bg-surface-container-high text-success">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">graphic_eq</span>
+              </span>
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">Spotify</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Individual</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Monthly</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant tabular-nums whitespace-nowrap">
+            <span data-design-text-token="body-sm">Apr 11, 2026</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-label-sm text-on-surface tabular-nums whitespace-nowrap">
+            <span data-design-text-token="label-sm">$9.99</span>
+          </td>
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <span data-design-text-token="label-sm" class="font-body text-label-sm text-success">Active</span>
+          </td>
+          <td class="py-2.5 px-1 text-right whitespace-nowrap">
+            <button type="button" data-action="more" aria-label="More actions for Spotify" class="inline-flex items-center justify-center w-7 h-7 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"><span class="material-symbols-outlined text-title-md" aria-hidden="true">more_horiz</span></button>
+          </td>
+        </tr><tr class="hover:bg-surface-container-high transition-colors duration-state-change ease-state-change">
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center shrink-0 bg-surface-container-high text-error">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">palette</span>
+              </span>
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">Adobe CC</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Pro</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Yearly</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant tabular-nums whitespace-nowrap">
+            <span data-design-text-token="body-sm">Dec 14, 2027</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-label-sm text-on-surface tabular-nums whitespace-nowrap">
+            <span data-design-text-token="label-sm">$659.88</span>
+          </td>
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <span data-design-text-token="label-sm" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant font-body text-label-sm text-warning"><span class="material-symbols-outlined text-body-sm" aria-hidden="true">warning</span><span>Unpaid</span></span>
+          </td>
+          <td class="py-2.5 px-1 text-right whitespace-nowrap">
+            <button type="button" data-action="pay" class="px-2.5 py-0.5 rounded-md bg-surface-container-high border border-outline-variant text-on-surface font-body text-label-sm hover:border-outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">Pay</button>
+          </td>
+        </tr><tr class="hover:bg-surface-container-high transition-colors duration-state-change ease-state-change">
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center shrink-0 bg-primary-container text-secondary">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">cloud</span>
+              </span>
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">iCloud</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">50GB</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Yearly</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant tabular-nums whitespace-nowrap">
+            <span data-design-text-token="body-sm">Nov 20, 2027</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-label-sm text-on-surface tabular-nums whitespace-nowrap">
+            <span data-design-text-token="label-sm">$11.88</span>
+          </td>
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <span data-design-text-token="label-sm" class="font-body text-label-sm text-success">Active</span>
+          </td>
+          <td class="py-2.5 px-1 text-right whitespace-nowrap">
+            <button type="button" data-action="more" aria-label="More actions for iCloud" class="inline-flex items-center justify-center w-7 h-7 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"><span class="material-symbols-outlined text-title-md" aria-hidden="true">more_horiz</span></button>
+          </td>
+        </tr><tr class="hover:bg-surface-container-high transition-colors duration-state-change ease-state-change">
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center shrink-0 bg-primary-container text-secondary">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">play_circle</span>
+              </span>
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">Amazon Prime</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Standard</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">Monthly</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant tabular-nums whitespace-nowrap">
+            <span data-design-text-token="body-sm">Apr 18, 2026</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-label-sm text-on-surface tabular-nums whitespace-nowrap">
+            <span data-design-text-token="label-sm">$11.58</span>
+          </td>
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <span data-design-text-token="label-sm" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant font-body text-label-sm text-warning"><span class="material-symbols-outlined text-body-sm" aria-hidden="true">warning</span><span>Unpaid</span></span>
+          </td>
+          <td class="py-2.5 px-1 text-right whitespace-nowrap">
+            <button type="button" data-action="pay" class="px-2.5 py-0.5 rounded-md bg-surface-container-high border border-outline-variant text-on-surface font-body text-label-sm hover:border-outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">Pay</button>
+          </td>
+        </tr></tbody>
+              </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="sub-empty-state" class="hidden flex-col items-center justify-center text-center py-6 px-4 gap-2 bg-surface-container-low rounded-md border border-outline-variant">
+              <p data-design-text-token="label-lg" class="font-body text-label-lg text-on-surface">No subscriptions found</p>
+              <button id="reset-sub-empty-btn" type="button" class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface border border-outline-variant font-body text-label-sm hover:border-outline">Show All</button>
+            </div>
+          </article>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Confirmation Toast with Undo -->
+  <div id="toast-banner" role="status" aria-live="polite" class="hidden fixed bottom-6 right-6 z-50 max-w-sm bg-[#0d0a14]/95 border border-primary/40 rounded-md px-4 py-3 flex items-center justify-between gap-4 shadow-lg">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <span class="material-symbols-outlined text-success text-title-md shrink-0" aria-hidden="true">check_circle</span>
+      <p id="toast-message" data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface"></p>
+    </div>
+    <button id="toast-undo-btn" type="button" class="hidden shrink-0 inline-flex items-center gap-1 font-body text-label-sm text-secondary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-sm">
+      <span class="material-symbols-outlined text-body-md" aria-hidden="true">undo</span>
+      <span>Undo</span>
+    </button>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('app-sidebar');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    const openBtn = document.getElementById('open-sidebar-btn');
+    const closeBtn = document.getElementById('close-sidebar-btn');
+
+    function setSidebar(open) {
+      if (open) {
+        sidebar.classList.remove('-translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+    if (openBtn) openBtn.addEventListener('click', () => setSidebar(true));
+    if (closeBtn) closeBtn.addEventListener('click', () => setSidebar(false));
+    if (backdrop) backdrop.addEventListener('click', () => setSidebar(false));
+
+    function formatUSD(amount, withSign = false) {
+      const formatted = Math.abs(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (!withSign) return '$' + formatted;
+      return (amount >= 0 ? '+$' : '-$') + formatted;
+    }
+
+    const periodData = {
+      '2026-11': {
+        label: 'Nov 2026',
+        balance: 16420.50,
+        balanceCompare: { pct: '+4.2%', vs: 'vs Oct 2026', positive: true },
+        income: 6250.00,
+        incomeCompare: { pct: '+6.8%', vs: 'vs Oct 2026', positive: true },
+        expense: 2840.00,
+        expenseCompare: { pct: '-3.1%', vs: 'vs Oct 2026', positive: true }
+      },
+      '2026-10': {
+        label: 'Oct 2026',
+        balance: 15758.00,
+        balanceCompare: { pct: '+2.1%', vs: 'vs Sep 2026', positive: true },
+        income: 5850.00,
+        incomeCompare: { pct: '0.0%', vs: 'vs Sep 2026', positive: true },
+        expense: 2930.00,
+        expenseCompare: { pct: '+5.4%', vs: 'vs Sep 2026', positive: false }
+      },
+      '2026-09': {
+        label: 'Sep 2026',
+        balance: 15434.00,
+        balanceCompare: { pct: '+1.8%', vs: 'vs Aug 2026', positive: true },
+        income: 5850.00,
+        incomeCompare: { pct: '+3.2%', vs: 'vs Aug 2026', positive: true },
+        expense: 2780.00,
+        expenseCompare: { pct: '-1.5%', vs: 'vs Aug 2026', positive: true }
+      },
+      '2026-01': {
+        label: 'Jan 2026',
+        balance: 12100.00,
+        balanceCompare: null,
+        income: 5200.00,
+        incomeCompare: null,
+        expense: 2490.00,
+        expenseCompare: null
+      }
+    };
+
+    const periodSelector = document.getElementById('period-selector');
+    function renderPeriodMetrics(key) {
+      const data = periodData[key];
+      if (!data) return;
+      document.getElementById('active-period-label').textContent = data.label;
+      document.querySelectorAll('.period-short').forEach(el => { el.textContent = data.label; });
+      document.getElementById('metric-balance').textContent = formatUSD(data.balance);
+      document.getElementById('metric-income').textContent = formatUSD(data.income);
+      document.getElementById('metric-expense').textContent = formatUSD(data.expense);
+
+      const renderCompare = (id, cmp) => {
+        const el = document.getElementById(id);
+        if (!cmp) {
+          el.innerHTML = '<span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">No prior comparison</span>';
+          return;
+        }
+        const colorClass = cmp.positive ? 'text-success' : 'text-warning';
+        const iconName = cmp.pct.startsWith('-') ? 'trending_down' : 'trending_up';
+        el.innerHTML = `
+          <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-surface-container-high ${colorClass} font-body text-label-sm tabular-nums">
+            <span class="material-symbols-outlined text-body-sm" aria-hidden="true">${iconName}</span>
+            <span data-design-text-token="label-sm">${cmp.pct}</span>
+          </span>
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">${cmp.vs}</span>
+        `;
+      };
+      renderCompare('metric-balance-compare', data.balanceCompare);
+      renderCompare('metric-income-compare', data.incomeCompare);
+      renderCompare('metric-expense-compare', data.expenseCompare);
+    }
+    const chartDatasets = {
+      '2026': [
+        { m: 'Jan', balance: 9240.00, income: 4320.00, expense: 2180.00 },
+        { m: 'Feb', balance: 11850.00, income: 3480.00, expense: 3290.00 },
+        { m: 'Mar', balance: 10420.00, income: 5940.00, expense: 1960.00 },
+        { m: 'Apr', balance: 14180.00, income: 4120.00, expense: 3840.00 },
+        { m: 'May', balance: 12350.00, income: 6180.00, expense: 2290.00 },
+        { m: 'Jun', balance: 13640.00, income: 4860.00, expense: 3510.00 },
+        { m: 'Jul', balance: 15890.00, income: 6840.00, expense: 2460.00, active: true },
+        { m: 'Aug', balance: 12940.00, income: 4450.00, expense: 3720.00 },
+        { m: 'Sep', balance: 15110.00, income: 5600.00, expense: 3120.00 },
+        { m: 'Oct', balance: 15760.00, income: 5850.00, expense: 2930.00 },
+        { m: 'Nov', balance: 16420.50, income: 6250.00, expense: 2840.00 },
+        { m: 'Dec', balance: 14820.00, income: 4920.00, expense: 2150.00 }
+      ],
+      '2025': [
+        { m: 'Jan', balance: 6840.00, income: 3820.00, expense: 2180.00 },
+        { m: 'Feb', balance: 8920.00, income: 3240.00, expense: 2910.00 },
+        { m: 'Mar', balance: 7940.00, income: 5120.00, expense: 1890.00 },
+        { m: 'Apr', balance: 10680.00, income: 3940.00, expense: 3140.00 },
+        { m: 'May', balance: 9120.00, income: 5480.00, expense: 2240.00 },
+        { m: 'Jun', balance: 10140.00, income: 4280.00, expense: 2980.00 },
+        { m: 'Jul', balance: 12280.00, income: 5910.00, expense: 2340.00, active: true },
+        { m: 'Aug', balance: 9890.00, income: 4190.00, expense: 3180.00 },
+        { m: 'Sep', balance: 11360.00, income: 5020.00, expense: 2690.00 },
+        { m: 'Oct', balance: 10540.00, income: 5150.00, expense: 2610.00 },
+        { m: 'Nov', balance: 11710.00, income: 5280.00, expense: 2590.00 },
+        { m: 'Dec', balance: 10980.00, income: 4490.00, expense: 2290.00 }
+      ],
+      'empty': []
+    };
+
+    const trendSvg = document.getElementById('trend-chart-svg');
+    const monthsRow = document.getElementById('chart-months-row');
+    const chartTooltip = document.getElementById('chart-tooltip');
+    const chartContainer = document.getElementById('chart-container');
+    const chartEmpty = document.getElementById('chart-empty-state');
+    const chartYearCaption = document.getElementById('chart-year-caption');
+    const chartYearSelect = document.getElementById('chart-year-select');
+
+    function formatWholeUSD(amount) {
+      return '$' + Math.round(amount).toLocaleString('en-US');
+    }
+
+    function formatPctDelta(curr, prev, invertPositive) {
+      if (!prev) return null;
+      const delta = ((curr - prev) / prev) * 100;
+      const sign = delta >= 0 ? '+' : '';
+      return {
+        pct: `${sign}${delta.toFixed(1)}%`,
+        positive: invertPositive ? delta <= 0 : delta >= 0
+      };
+    }
+
+    function syncCardsFromChartMonth(items, idx, year) {
+      const item = items[idx];
+      if (!item) return;
+      const prev = idx > 0 ? items[idx - 1] : null;
+      const label = `${item.m} ${year}`;
+      const periodSub = document.getElementById('period-subtitle-month');
+      if (periodSub) periodSub.textContent = label;
+      document.querySelectorAll('.period-short').forEach(el => { el.textContent = label; });
+      document.getElementById('metric-balance').textContent = formatUSD(item.balance);
+      document.getElementById('metric-income').textContent = formatUSD(item.income);
+      document.getElementById('metric-expense').textContent = formatUSD(item.expense);
+
+      const renderCompare = (id, cmp, vsLabel) => {
+        const el = document.getElementById(id);
+        if (!cmp) {
+          el.innerHTML = '<span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">Year baseline</span>';
+          return;
+        }
+        const colorClass = cmp.positive ? 'text-success' : 'text-warning';
+        const iconName = cmp.pct.startsWith('-') ? 'trending_down' : 'trending_up';
+        el.innerHTML = `
+          <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-surface-container-high ${colorClass} font-body text-label-sm tabular-nums">
+            <span class="material-symbols-outlined text-body-sm" aria-hidden="true">${iconName}</span>
+            <span data-design-text-token="label-sm">${cmp.pct}</span>
+          </span>
+          <span data-design-text-token="body-sm" class="font-body text-body-sm text-on-surface-variant">vs ${vsLabel}</span>
+        `;
+      };
+
+      const vsLabel = prev ? `${prev.m} ${year}` : '';
+      renderCompare('metric-balance-compare', formatPctDelta(item.balance, prev?.balance, false), vsLabel);
+      renderCompare('metric-income-compare', formatPctDelta(item.income, prev?.income, false), vsLabel);
+      renderCompare('metric-expense-compare', formatPctDelta(item.expense, prev?.expense, true), vsLabel);
+
+      if (year === '2026') {
+        const monthToPeriod = { Nov: '2026-11', Oct: '2026-10', Sep: '2026-09' };
+        if (monthToPeriod[item.m]) periodSelector.value = monthToPeriod[item.m];
+      }
+    }
+
+    periodSelector.addEventListener('change', (e) => {
+      const val = e.target.value;
+      renderPeriodMetrics(val);
+      const periodToMonth = { '2026-11': 'Nov', '2026-10': 'Oct', '2026-09': 'Sep' };
+      const targetMonth = periodToMonth[val];
+      if (targetMonth && chartDatasets['2026']) {
+        chartDatasets['2026'].forEach(i => { i.active = (i.m === targetMonth); });
+        if (chartYearSelect) chartYearSelect.value = '2026';
+        renderChart('2026');
+      }
+    });
+
+    function updateTooltip(item, year, idx) {
+      const net = item.income - item.expense;
+      const netSign = net >= 0 ? '+' : '-';
+      document.getElementById('tooltip-month').textContent = `${item.m} ${year}`;
+      const netEl = document.getElementById('tooltip-total');
+      netEl.textContent = `Net ${netSign}${formatWholeUSD(Math.abs(net))}`;
+      netEl.className = `font-body text-label-sm tabular-nums ${net >= 0 ? 'text-success' : 'text-warning'}`;
+      document.getElementById('tooltip-cat1').textContent = formatUSD(item.balance);
+      document.getElementById('tooltip-cat2').textContent = formatUSD(item.income);
+      document.getElementById('tooltip-cat3').textContent = formatUSD(item.expense);
+      if (chartTooltip && typeof idx === 'number') {
+        const pct = Math.min(80, Math.max(20, ((30 + idx * 60) / 720) * 100));
+        chartTooltip.style.left = `${pct}%`;
+      }
+    }
+
+    function buildSmoothPath(points) {
+      if (!points.length) return '';
+      if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
+      let d = `M ${points[0].x} ${points[0].y}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const p0 = points[i];
+        const p1 = points[i + 1];
+        const cx = (p0.x + p1.x) / 2;
+        d += ` C ${cx} ${p0.y}, ${cx} ${p1.y}, ${p1.x} ${p1.y}`;
+      }
+      return d;
+    }
+
+    function renderChart(year) {
+      const items = chartDatasets[year] || [];
+      if (chartYearCaption) {
+        chartYearCaption.textContent = `*This chart shows data for ${year === 'empty' ? '2024' : year}`;
+      }
+      if (items.length === 0) {
+        chartContainer.classList.add('hidden');
+        chartEmpty.classList.remove('hidden');
+        chartEmpty.classList.add('flex');
+        return;
+      }
+      chartEmpty.classList.add('hidden');
+      chartEmpty.classList.remove('flex');
+      chartContainer.classList.remove('hidden');
+
+      const yTop = 14;
+      const yBottom = 172;
+      const ySpan = yBottom - yTop;
+      const maxBal = 20000;
+      const maxFlow = 8000;
+      const toBalY = (val) => Math.round((yBottom - (Math.min(maxBal, Math.max(0, val)) / maxBal) * ySpan) * 10) / 10;
+      const toFlowY = (val) => Math.round((yBottom - (Math.min(maxFlow, Math.max(0, val)) / maxFlow) * ySpan) * 10) / 10;
+      const toY = toBalY;
+      const toX = (idx) => 30 + idx * 60;
+
+      const ptsBal = items.map((d, i) => ({ x: toX(i), y: toBalY(d.balance) }));
+      const ptsInc = items.map((d, i) => ({ x: toX(i), y: toFlowY(d.income) }));
+      const ptsExp = items.map((d, i) => ({ x: toX(i), y: toFlowY(d.expense) }));
+
+      let activeIdx = items.findIndex((i) => i.active);
+      if (activeIdx < 0) activeIdx = 6;
+
+      const pathBal = buildSmoothPath(ptsBal);
+      const pathInc = buildSmoothPath(ptsInc);
+      const pathExp = buildSmoothPath(ptsExp);
+      const areaBal = `${pathBal} L ${ptsBal[ptsBal.length - 1].x} ${yBottom} L ${ptsBal[0].x} ${yBottom} Z`;
+
+      const vGridLines = items.map((_, i) => {
+        const x = toX(i);
+        return `<line x1="${x}" y1="${yTop}" x2="${x}" y2="${yBottom}" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" class="text-outline-variant" />`;
+      }).join('');
+
+      const hGridValues = [5000, 10000, 15000, 20000];
+      const hGridLines = hGridValues.map((v) => {
+        const y = toY(v);
+        return `<line x1="12" y1="${y}" x2="708" y2="${y}" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4" class="text-outline-variant opacity-60" />`;
+      }).join('');
+
+      const drawSvgOverlay = (idx) => {
+        const ax = toX(idx);
+        const ayBal = ptsBal[idx].y;
+        const ayInc = ptsInc[idx].y;
+        const ayExp = ptsExp[idx].y;
+
+        trendSvg.setAttribute('aria-label', `Annual cash flow trend chart for ${year}`);
+        trendSvg.innerHTML = `
+          <defs>
+            <linearGradient id="trend-area-balance" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9312ff" stop-opacity="0.32" />
+              <stop offset="55%" stop-color="#7a1cf8" stop-opacity="0.10" />
+              <stop offset="100%" stop-color="#9312ff" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          ${hGridLines}
+          ${vGridLines}
+          <line x1="12" y1="${yBottom}" x2="708" y2="${yBottom}" stroke="currentColor" stroke-width="1" class="text-outline-variant" />
+          <path d="${areaBal}" fill="url(#trend-area-balance)" />
+          <path d="${pathExp}" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="text-warning" />
+          <path d="${pathInc}" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" class="text-success" />
+          <path d="${pathBal}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-secondary" />
+          <line x1="${ax}" y1="${yTop}" x2="${ax}" y2="${yBottom}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" class="text-on-surface-variant" />
+          <circle cx="${ax}" cy="${ayExp}" r="4.5" stroke="currentColor" stroke-width="2.5" class="fill-surface-container text-warning" />
+          <circle cx="${ax}" cy="${ayInc}" r="4.5" stroke="currentColor" stroke-width="2.5" class="fill-surface-container text-success" />
+          <circle cx="${ax}" cy="${ayBal}" r="4.5" stroke="currentColor" stroke-width="2.5" class="fill-surface-container text-secondary" />
+        `;
+      };
+
+      drawSvgOverlay(activeIdx);
+      updateTooltip(items[activeIdx], year, activeIdx);
+
+      monthsRow.innerHTML = '';
+      items.forEach((item, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', `${item.m} ${year}: Balance ${formatUSD(item.balance)}, Income ${formatUSD(item.income)}, Expenses ${formatUSD(item.expense)}`);
+        btn.setAttribute('aria-pressed', item.active ? 'true' : 'false');
+        btn.className = `py-1 rounded-full font-body text-label-sm transition-colors duration-state-change focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary ${
+          item.active
+            ? 'bg-surface-container-high text-on-surface border border-outline-variant'
+            : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low border border-transparent'
+        }`;
+        btn.textContent = item.m;
+
+        const inspectMonth = () => {
+          drawSvgOverlay(idx);
+          updateTooltip(item, year, idx);
+        };
+
+        btn.addEventListener('mouseenter', inspectMonth);
+        btn.addEventListener('focus', inspectMonth);
+        btn.addEventListener('click', () => {
+          items.forEach((i) => { i.active = (i === item); });
+          syncCardsFromChartMonth(items, idx, year);
+          renderChart(year);
+        });
+        monthsRow.appendChild(btn);
+      });
+    }
+
+    document.getElementById('chart-year-select').addEventListener('change', (e) => renderChart(e.target.value));
+    const chartMoreBtn = document.getElementById('chart-more-btn');
+    if (chartMoreBtn) {
+      chartMoreBtn.addEventListener('click', () => {
+        showToast('Annual spending breakdown options opened.');
+      });
+    }
+    renderChart('2026');
+
+    let subscriptions = [
+      { id: 1, service: 'Netflix', plan: 'Premium', billing: 'Monthly', nextBilling: 'Apr 5, 2026', amount: 19.99, status: 'Active', icon: 'movie', iconBg: 'bg-surface-container-high text-error' },
+      { id: 2, service: 'Spotify', plan: 'Individual', billing: 'Monthly', nextBilling: 'Apr 11, 2026', amount: 9.99, status: 'Active', icon: 'graphic_eq', iconBg: 'bg-surface-container-high text-success' },
+      { id: 3, service: 'Adobe CC', plan: 'Pro', billing: 'Yearly', nextBilling: 'Dec 14, 2027', amount: 659.88, status: 'Unpaid', icon: 'palette', iconBg: 'bg-surface-container-high text-error' },
+      { id: 4, service: 'iCloud', plan: '50GB', billing: 'Yearly', nextBilling: 'Nov 20, 2027', amount: 11.88, status: 'Active', icon: 'cloud', iconBg: 'bg-primary-container text-secondary' },
+      { id: 5, service: 'Amazon Prime', plan: 'Standard', billing: 'Monthly', nextBilling: 'Apr 18, 2026', amount: 11.58, status: 'Unpaid', icon: 'play_circle', iconBg: 'bg-primary-container text-secondary' }
+    ];
+
+    const subBody = document.getElementById('sub-table-body');
+    const subEmpty = document.getElementById('sub-empty-state');
+    const globalSearch = document.getElementById('global-search');
+    let subSortKey = null;
+    let subSortAsc = true;
+
+    let lastUndo = null;
+    let toastTimer = null;
+
+    function showToast(msg, undoCallback = null) {
+      const toast = document.getElementById('toast-banner');
+      const msgEl = document.getElementById('toast-message');
+      const undoBtn = document.getElementById('toast-undo-btn');
+      msgEl.textContent = msg;
+      lastUndo = undoCallback;
+
+      if (undoCallback) {
+        undoBtn.classList.remove('hidden');
+      } else {
+        undoBtn.classList.add('hidden');
+      }
+
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('hidden'), 5000);
+    }
+
+    document.getElementById('toast-undo-btn').addEventListener('click', () => {
+      if (lastUndo) {
+        lastUndo();
+        lastUndo = null;
+      }
+      document.getElementById('toast-banner').classList.add('hidden');
+    });
+
+    function renderSubscriptions() {
+      const query = (globalSearch ? globalSearch.value : '').toLowerCase().trim();
+      let filtered = subscriptions.filter(sub =>
+        !query ||
+        sub.service.toLowerCase().includes(query) ||
+        sub.plan.toLowerCase().includes(query) ||
+        sub.billing.toLowerCase().includes(query) ||
+        sub.status.toLowerCase().includes(query)
+      );
+
+      if (subSortKey) {
+        filtered = [...filtered].sort((a, b) => {
+          let valA = a[subSortKey];
+          let valB = b[subSortKey];
+          if (subSortKey === 'nextBilling') {
+            valA = new Date(valA).getTime();
+            valB = new Date(valB).getTime();
+          }
+          if (typeof valA === 'number' && typeof valB === 'number') {
+            return subSortAsc ? valA - valB : valB - valA;
+          }
+          return subSortAsc
+            ? String(valA).localeCompare(String(valB))
+            : String(valB).localeCompare(String(valA));
+        });
+      }
+
+      subBody.innerHTML = '';
+      if (filtered.length === 0) {
+        subEmpty.classList.remove('hidden');
+        subEmpty.classList.add('flex');
+        return;
+      }
+      subEmpty.classList.add('hidden');
+      subEmpty.classList.remove('flex');
+
+      filtered.forEach(sub => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-surface-container-high transition-colors duration-state-change ease-state-change';
+
+        const statusHtml = sub.status === 'Active'
+          ? `<span data-design-text-token="label-sm" class="font-body text-label-sm text-success">Active</span>`
+          : `<span data-design-text-token="label-sm" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant font-body text-label-sm text-warning"><span class="material-symbols-outlined text-body-sm" aria-hidden="true">warning</span><span>Unpaid</span></span>`;
+
+        const actionHtml = sub.status === 'Active'
+          ? `<button type="button" data-action="more" aria-label="More actions for ${sub.service}" class="inline-flex items-center justify-center w-7 h-7 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"><span class="material-symbols-outlined text-title-md" aria-hidden="true">more_horiz</span></button>`
+          : `<button type="button" data-action="pay" class="px-2.5 py-0.5 rounded-md bg-surface-container-high border border-outline-variant text-on-surface font-body text-label-sm hover:border-outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">Pay</button>`;
+
+        tr.innerHTML = `
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full border border-outline-variant flex items-center justify-center shrink-0 ${sub.iconBg}">
+                <span class="material-symbols-outlined text-body-md" aria-hidden="true">${sub.icon}</span>
+              </span>
+              <span data-design-text-token="label-sm" class="font-body text-label-sm text-on-surface">${sub.service}</span>
+            </div>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">${sub.plan}</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant whitespace-nowrap">
+            <span data-design-text-token="body-sm">${sub.billing}</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-body-sm text-on-surface-variant tabular-nums whitespace-nowrap">
+            <span data-design-text-token="body-sm">${sub.nextBilling}</span>
+          </td>
+          <td class="py-2.5 px-1 font-body text-label-sm text-on-surface tabular-nums whitespace-nowrap">
+            <span data-design-text-token="label-sm">${formatUSD(sub.amount)}</span>
+          </td>
+          <td class="py-2.5 px-1 whitespace-nowrap">
+            ${statusHtml}
+          </td>
+          <td class="py-2.5 px-1 text-right whitespace-nowrap">
+            ${actionHtml}
+          </td>
+        `;
+
+        const actionBtn = tr.querySelector('[data-action]');
+        actionBtn.addEventListener('click', () => {
+          if (actionBtn.dataset.action === 'pay') {
+            const prevStatus = sub.status;
+            sub.status = 'Active';
+            renderSubscriptions();
+            showToast(`Paid ${sub.service} (${formatUSD(sub.amount)}).`, () => {
+              sub.status = prevStatus;
+              renderSubscriptions();
+            });
+          } else {
+            showToast(`Managing ${sub.service} (${sub.plan} • ${sub.billing}).`);
+          }
+        });
+
+        subBody.appendChild(tr);
+      });
+    }
+
+    document.querySelectorAll('.sub-sort-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.sortKey;
+        if (subSortKey === key) {
+          subSortAsc = !subSortAsc;
+        } else {
+          subSortKey = key;
+          subSortAsc = true;
+        }
+        renderSubscriptions();
+      });
+    });
+
+    if (globalSearch) {
+      globalSearch.addEventListener('input', renderSubscriptions);
+    }
+
+    document.getElementById('reset-sub-empty-btn').addEventListener('click', () => {
+      if (globalSearch) globalSearch.value = '';
+      renderSubscriptions();
+    });
+
+    document.getElementById('add-subscription-btn').addEventListener('click', () => {
+      showToast('Add Subscription form ready to connect a recurring bill.');
+    });
+
+    document.getElementById('view-all-subs-btn').addEventListener('click', () => {
+      showToast('Showing all 5 active & upcoming subscriptions.');
+    });
+
+    window.disconnectAccount = function(id, name) {
+      const el = document.querySelector(`[data-account-id="${id}"]`);
+      if (!el) return;
+      el.classList.add('hidden');
+      const remaining = document.querySelectorAll('#accounts-list > li:not(.hidden)').length;
+      document.getElementById('connected-count-badge').textContent = `${remaining} Accounts`;
+      showToast(`Disconnected ${name}.`, () => {
+        el.classList.remove('hidden');
+        const count = document.querySelectorAll('#accounts-list > li:not(.hidden)').length;
+        document.getElementById('connected-count-badge').textContent = `${count} Accounts`;
+      });
+    };
+
+    window.retrySync = function() {
+      showToast('Authorization refresh requested for Citibank.');
+    };
+
+    document.getElementById('sync-all-btn').addEventListener('click', () => {
+      document.getElementById('sync-status-text').textContent = 'Synced: Just now';
+      showToast('All active accounts synced.');
+    });
+
+    const notificationsBtn = document.getElementById('notifications-btn');
+    if (notificationsBtn) {
+      notificationsBtn.addEventListener('click', () => {
+        showToast('1 alert: Citibank session expired. Refresh access.');
+      });
+    }
+
+    document.getElementById('connect-account-btn').addEventListener('click', () => {
+      showToast('Select a supported bank or wallet to connect.');
+    });
+
+    const txHistoryPeriod = document.getElementById('tx-history-period');
+    if (txHistoryPeriod) {
+      txHistoryPeriod.addEventListener('change', (e) => {
+        const progress = document.getElementById('tx-history-progress');
+        const delta = document.getElementById('tx-history-delta');
+        const sofar = document.getElementById('tx-history-sofar');
+        if (e.target.value === 'last-month') {
+          progress.style.width = '78%';
+          delta.innerHTML = 'Decreased <span class="font-body text-label-sm text-on-surface">4%</span> last month';
+          sofar.innerHTML = '<span class="font-body text-label-sm text-on-surface">$284.50</span> total';
+        } else {
+          progress.style.width = '62%';
+          delta.innerHTML = 'Increased <span class="font-body text-label-sm text-on-surface">12%</span> this month';
+          sofar.innerHTML = '<span class="font-body text-label-sm text-on-surface">$102.00</span> so far';
+        }
+      });
+    }
+
+    renderSubscriptions();
+  </script>
+
+
+</body></html>

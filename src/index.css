@@ -1,0 +1,430 @@
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@600;700&family=Instrument+Sans:wght@400;500;600;700&family=Source+Code+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #000000;
+  --panel-bg: rgba(11, 9, 17, 0.86);
+  --panel-surface: rgba(20, 16, 31, 0.72);
+  --sidebar-bg: rgba(8, 6, 13, 0.55);
+  --nav-capsule-bg: rgba(14, 12, 20, 0.68);
+  --nav-active-pill: #171420;
+  --modal-bg: #0d0a14;
+  --text: #f7f7f8;
+  --muted: #9e9c9b;
+  --violet-muted: #c2b4d4;
+  --violet-link: #d6adff;
+  --violet: #9312ff;
+  --violet-bright: #b14eff;
+  --violet-grad-a: #a020ff;
+  --violet-grad-b: #7a1cf8;
+  --violet-rim-light: #e0b3ff;
+  --green: #45b558;
+  --red: #f03b2a;
+  --panel-border: rgba(147, 18, 255, 0.34);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --btn-dark-border: rgba(255, 255, 255, 0.14);
+  --active-ring: rgba(147, 18, 255, 0.36);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html,
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+/* ==================== SHARED OBSIDIAN GLASS UTILITIES ==================== */
+.obsidian-panel {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  isolation: isolate;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(147, 18, 255, 0.14),
+    inset 0 1px 0 rgba(224, 179, 255, 0.22);
+}
+
+.obsidian-surface {
+  background-color: var(--panel-surface);
+  border-color: var(--hairline);
+}
+
+.obsidian-sidebar-card {
+  background-color: var(--sidebar-bg);
+  border-color: var(--hairline);
+}
+
+.obsidian-nav-capsule {
+  background-color: var(--nav-capsule-bg) !important;
+  border-color: var(--hairline);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  isolation: isolate;
+}
+
+.obsidian-nav-active {
+  background-color: var(--nav-active-pill);
+  border: 1px solid var(--active-ring);
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 rgba(224, 179, 255, 0.14),
+    0 0 18px rgba(147, 18, 255, 0.18);
+}
+
+.obsidian-violet-btn {
+  background: linear-gradient(135deg, var(--violet-grad-a) 0%, var(--violet-grad-b) 100%);
+  color: #ffffff;
+  box-shadow:
+    0 0 20px rgba(147, 18, 255, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition:
+    transform 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out),
+    filter 180ms var(--ease-out);
+}
+
+a.obsidian-violet-btn:hover,
+button.obsidian-violet-btn:hover {
+  filter: brightness(1.12);
+  box-shadow:
+    0 0 32px rgba(160, 32, 255, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+  transform: translateY(-1px);
+}
+
+a.obsidian-violet-btn:active,
+button.obsidian-violet-btn:active {
+  transform: translateY(0);
+}
+
+.obsidian-dark-btn {
+  background: rgba(18, 15, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text);
+  transition:
+    transform 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out),
+    border-color 180ms var(--ease-out),
+    background-color 180ms var(--ease-out);
+}
+
+.obsidian-dark-btn:hover {
+  background: rgba(34, 24, 52, 0.92);
+  border-color: rgba(160, 32, 255, 0.65);
+  box-shadow: 0 0 26px rgba(147, 18, 255, 0.44);
+  transform: translateY(-1px);
+}
+
+.obsidian-dark-btn:active {
+  transform: translateY(0);
+}
+
+.obsidian-hero-card {
+  background-color: var(--panel-surface);
+  border-color: var(--panel-border);
+  box-shadow: inset 0 1px 0 rgba(224, 179, 255, 0.18);
+}
+
+/* ==================== DASHBOARD-SPECIFIC OBSIDIAN OVERRIDES ==================== */
+.dashboard-page {
+  --muted: #8b8988;
+  --violet-muted: #b7a8c9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.obsidian-canvas {
+  background:
+    radial-gradient(60% 45% at 72% 8%, rgba(147, 18, 255, 0.18) 0%, rgba(122, 28, 248, 0.05) 45%, transparent 75%),
+    radial-gradient(45% 40% at 15% 85%, rgba(177, 78, 255, 0.1) 0%, transparent 70%),
+    var(--bg);
+}
+
+.dashboard-page .obsidian-panel {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(224, 179, 255, 0.12);
+}
+
+.dashboard-page .obsidian-sidebar-card {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(224, 179, 255, 0.12);
+}
+
+.dashboard-page .obsidian-nav-active {
+  box-shadow:
+    inset 0 1px 0 rgba(224, 179, 255, 0.14),
+    0 0 20px rgba(147, 18, 255, 0.14);
+}
+
+.dashboard-page .obsidian-violet-btn {
+  background: linear-gradient(135deg, var(--violet-grad-a), var(--violet-grad-b));
+  color: var(--text);
+  box-shadow:
+    0 6px 20px rgba(147, 18, 255, 0.35),
+    inset 0 1px 0 rgba(224, 179, 255, 0.32);
+}
+
+.dashboard-page .obsidian-hero-card {
+  background-color: var(--panel-surface);
+  border-color: var(--panel-border);
+  box-shadow:
+    inset 0 1px 0 rgba(224, 179, 255, 0.18),
+    0 12px 32px rgba(147, 18, 255, 0.08);
+  transition:
+    transform 220ms var(--ease-out),
+    border-color 220ms var(--ease-out),
+    box-shadow 220ms var(--ease-out);
+}
+
+.dashboard-page .obsidian-hero-card:hover {
+  border-color: rgba(177, 78, 255, 0.56);
+  box-shadow:
+    inset 0 1px 0 rgba(224, 179, 255, 0.28),
+    0 16px 38px rgba(147, 18, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.dashboard-card-interactive {
+  transition:
+    transform 220ms var(--ease-out),
+    border-color 220ms var(--ease-out),
+    box-shadow 220ms var(--ease-out),
+    background-color 220ms var(--ease-out);
+}
+
+.dashboard-card-interactive:hover {
+  border-color: rgba(177, 78, 255, 0.32);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(224, 179, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.dashboard-page .obsidian-violet-btn:hover {
+  filter: brightness(1.1);
+  box-shadow:
+    0 8px 26px rgba(147, 18, 255, 0.48),
+    inset 0 1px 0 rgba(224, 179, 255, 0.42);
+  transform: translateY(-1px);
+}
+
+.dashboard-page .obsidian-violet-btn:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.dashboard-page button,
+.dashboard-page a[href],
+.dashboard-page select {
+  cursor: pointer;
+}
+
+.dashboard-page button:disabled {
+  cursor: not-allowed;
+}
+
+/* ==================== LANDING ATMOSPHERE & MICRO-INTERACTIONS ==================== */
+.top-violet-rim-line {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(147, 18, 255, 0.25) 18%,
+    rgba(224, 179, 255, 0.95) 50%,
+    rgba(147, 18, 255, 0.25) 82%,
+    transparent 100%
+  );
+  box-shadow: 0 0 24px rgba(177, 78, 255, 0.75);
+}
+
+.planet-horizon-top {
+  background: radial-gradient(
+    64% 48% at 50% 0%,
+    rgba(224, 179, 255, 0.42) 0%,
+    rgba(147, 18, 255, 0.24) 24%,
+    rgba(122, 28, 248, 0.08) 48%,
+    transparent 74%
+  );
+}
+
+.planet-arc-svg {
+  filter: drop-shadow(0 0 26px rgba(147, 18, 255, 0.7)) drop-shadow(0 0 8px rgba(224, 179, 255, 0.65));
+}
+
+.planet-horizon-bottom {
+  background: radial-gradient(
+    68% 58% at 50% 100%,
+    rgba(147, 18, 255, 0.34) 0%,
+    rgba(122, 28, 248, 0.12) 42%,
+    transparent 72%
+  );
+}
+
+.material-symbols-outlined,
+.material-symbols-rounded,
+.material-symbols-sharp,
+.material-icons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  line-height: 1 !important;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+@keyframes hubPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 22px rgba(147, 18, 255, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 0 38px rgba(177, 78, 255, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  }
+}
+
+.hub-pulse {
+  animation: hubPulse 3.2s ease-in-out infinite;
+}
+
+.hover-card {
+  transition:
+    transform 260ms var(--ease-out),
+    border-color 260ms var(--ease-out),
+    box-shadow 260ms var(--ease-out),
+    background-color 260ms var(--ease-out);
+}
+
+.hover-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(160, 32, 255, 0.45);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(147, 18, 255, 0.18);
+}
+
+.hover-mini-card {
+  transition:
+    transform 200ms var(--ease-out),
+    border-color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+.hover-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(160, 32, 255, 0.45);
+  background-color: rgba(23, 20, 34, 0.9);
+}
+
+.hover-arrow {
+  transition: transform 200ms var(--ease-out);
+}
+
+.obsidian-violet-btn:hover .hover-arrow {
+  transform: translateX(3px);
+}
+
+@keyframes marqueeLoop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeLoop 26s linear infinite;
+  will-change: transform;
+}
+
+#main-navbar {
+  background-color: rgba(11, 9, 17, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition:
+    background-color 420ms var(--ease-out),
+    border-color 420ms var(--ease-out),
+    backdrop-filter 420ms var(--ease-out),
+    -webkit-backdrop-filter 420ms var(--ease-out),
+    box-shadow 420ms var(--ease-out);
+}
+
+#main-navbar.is-scrolled {
+  background-color: rgba(16, 13, 24, 0.36);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ==================== FAQ ACCORDION STYLES ==================== */
+.faq-card {
+  transition:
+    border-color 260ms var(--ease-out),
+    box-shadow 260ms var(--ease-out),
+    background-color 260ms var(--ease-out);
+}
+
+.faq-card-open {
+  border-color: rgba(160, 32, 255, 0.48) !important;
+  background-color: rgba(20, 16, 31, 0.88) !important;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(147, 18, 255, 0.16),
+    inset 0 1px 0 rgba(224, 179, 255, 0.16) !important;
+}
+
+.faq-card-open .faq-chevron-wrap {
+  background-color: rgba(147, 18, 255, 0.22) !important;
+  border-color: rgba(177, 78, 255, 0.5) !important;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video-layer {
+    display: none !important;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
